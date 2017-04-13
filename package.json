@@ -1,0 +1,33 @@
+{
+  "name": "better-try-catch",
+  "version": "0.1.0",
+  "description": "Better exception handling with try-catch",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.js --coverage",
+    "codecov": "tap --coverage-report=lcov && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riophae/better-try-catch.git"
+  },
+  "keywords": [
+    "error",
+    "exception",
+    "try/catch",
+    "async/await"
+  ],
+  "author": "Riophae Lee <riophaelee@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riophae/better-try-catch/issues"
+  },
+  "homepage": "https://github.com/riophae/better-try-catch#readme",
+  "dependencies": {
+    "is-promise": "^2.1.0"
+  },
+  "devDependencies": {
+    "codecov": "^2.1.0",
+    "tap": "^10.3.2"
+  }
+}
