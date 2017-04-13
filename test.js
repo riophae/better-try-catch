@@ -24,15 +24,6 @@ function assertContext(t, f) {
   }
 }
 
-function isAsyncAwaitSupported() {
-  try {
-    eval('async function x() {}')
-    return true
-  } catch (err) {
-    return false
-  }
-}
-
 test('basic', (t) => {
   t.deepEqual(btc(success)(val), [null, val])
   t.deepEqual(btc(failure)(val), [err])
@@ -47,18 +38,16 @@ test('with context', (t) => {
   t.end()
 })
 
-if (isAsyncAwaitSupported()) {
-  test('async/await', async (t) => {
-    t.deepEqual(await btc(wrapPromise(success))(val), [null, val])
-    t.deepEqual(await btc(wrapPromise(failure))(val), [err])
+test('async/await', async (t) => {
+  t.deepEqual(await btc(wrapPromise(success))(val), [null, val])
+  t.deepEqual(await btc(wrapPromise(failure))(val), [err])
 
-    t.end()
-  })
+  t.end()
+})
 
-  test('async/await with context', async (t) => {
-    t.deepEqual(await btc(assertContext(t, wrapPromise(success))).call(ctx, val), [null, val])
-    t.deepEqual(await btc(assertContext(t, wrapPromise(failure))).call(ctx, val), [err])
+test('async/await with context', async (t) => {
+  t.deepEqual(await btc(assertContext(t, wrapPromise(success))).call(ctx, val), [null, val])
+  t.deepEqual(await btc(assertContext(t, wrapPromise(failure))).call(ctx, val), [err])
 
-    t.end()
-  })
-}
+  t.end()
+})
