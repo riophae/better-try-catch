@@ -47,7 +47,7 @@ if (!err) {
 }
 ```
 
-Humm, it should not be too hard to solve. After one or three minutes of thinking, we have the code rearranged to be like this:
+Humm, it should be not too hard to solve. After one or three minutes of thinking, we have the code rearranged to be like this:
 
 ```javascript
 var err // Hoist the error variable declaration
