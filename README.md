@@ -29,6 +29,53 @@ async function fn() {
 }
 ```
 
+## I didn't see it's "better"?
+
+Consider a situation like this:
+
+```javascript
+try {
+  doSomething()
+} catch (err) {
+  // The varaible `err` is only visible in the catch block
+}
+// With the code goes here, the variable `err` is no longer existing
+// If we have to make sure there wasn't anything went wrong above
+// How do we know that?
+if (!err) {
+  // ...
+}
+```
+
+Humm, it should not be too hard to solve. After one or three minutes of thinking, we have the code rearranged to be like this:
+
+```javascript
+var err // Hoist the error variable declaration
+try {
+  doSomething()
+} catch (ex) {
+  err = ex // notice here
+}
+// Alright, this time we are able to safely access the error variable outside the try-catch block
+if (!err) {
+  // ...
+}
+```
+
+Okay, seems the problem has gone, with the only exception that the code looks a little more messy now. C'mon! Can't we do it better? better-try-catch to the rescue™!
+
+```javascript
+var btc = require('better-try-catch')
+// better-try-catch wraps the function and will catch errors for you
+// The wrapped function will return both error and value
+// Which is somewhat looks like the node-style callbacks
+var [err, result] = btc(doSomething)()
+// And that's all we have to do, as simple as you can see
+if (!err) { // Was there anything went wrong?
+  // Nope, we are perfectly sure that everthing is running well as expected! :D
+}
+```
+
 ## License
 
 MIT License, Copyright (c) 2017 Riophae Lee
