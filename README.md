@@ -67,7 +67,7 @@ Okay, seems the problem has gone, with the only exception that the code looks a 
 ```javascript
 var btc = require('better-try-catch')
 // better-try-catch wraps the function and will catch errors for you
-// The wrapped function will return both error and value
+// The wrapped function will *always* return both error and value
 // Which is somewhat looks like the node-style callbacks
 var [err, result] = btc(doSomething)()
 // And that's all we have to do, as simple as you can see
