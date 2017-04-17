@@ -55,6 +55,8 @@ try {
   doSomething()
 } catch (ex) {
   err = ex // notice here
+  // also, we can not simply place the `if` statement inside the catch block
+  // since if no errors occured then the `if` statement will not execute at all
 }
 // Alright, this time we are able to safely access the error variable outside the try-catch block
 if (!err) {
