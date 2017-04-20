@@ -54,9 +54,9 @@ var err // Hoist the error variable declaration
 try {
   doSomething()
 } catch (ex) {
-  err = ex // notice here
-  // also, we can not simply place the `if` statement inside the catch block
-  // since if no errors occured then the `if` statement will not execute at all
+  err = ex // Notice here
+  // Also, we can not simply place the `if` statement inside the catch block
+  // Since if no errors occured then the `if` statement will not execute at all
 }
 // Alright, this time we are able to safely access the error variable outside the try-catch block
 if (!err) {
@@ -70,7 +70,7 @@ Okay, seems the problem has gone, with the only exception that the code looks a 
 var btc = require('better-try-catch')
 // better-try-catch wraps the function and will catch errors for you
 // The wrapped function will *always* return both error and value
-// Which is somewhat looks like the node-style callbacks
+// Which somewhat looks like the node-style callbacks
 var [err, result] = btc(doSomething)()
 // And that's all we have to do, as simple as you can see
 if (!err) { // Was there anything went wrong?
