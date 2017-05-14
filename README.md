@@ -21,11 +21,16 @@ if (!err) {
 }
 
 // You can also use better-try-catch with async/await functions
-async function fn() {
+async function example1() {
   var [err, result] = await btc(someFunctionThatReturnsPromise)(arg1, arg2)
   if (!err) {
     // ...
   }
+}
+
+// Or even use with functions that accept node-style callback:
+async function example2() {
+  var [err, result] = await btc.promisify(fs.readFile)('data.json', 'utf8')
 }
 ```
 
