@@ -1,3 +1,5 @@
+'use strict'
+
 const btc = require('./')
 const { test } = require('tap')
 
@@ -17,9 +19,17 @@ function wrapPromise(fn) {
   return (...args) => new Promise(resolve => resolve(fn.apply(this, args)))
 }
 
+function callCallbackWithSuccess(x, cb) {
+  setTimeout(() => cb(null, x))
+}
+
+function callCallbackWithFailure(x, cb) {
+  setTimeout(() => cb(err))
+}
+
 function assertContext(t, f) {
   return function () {
-    t.equal(this, ctx)
+    t.equal(this, ctx, 'should be called with specified context')
     return f.apply(this, arguments)
   }
 }
@@ -48,6 +58,20 @@ test('async/await', async (t) => {
 test('async/await with context', async (t) => {
   t.deepEqual(await btc(assertContext(t, wrapPromise(success))).call(ctx, val), [null, val])
   t.deepEqual(await btc(assertContext(t, wrapPromise(failure))).call(ctx, val), [err])
+
+  t.end()
+})
+
+test('promisify', async (t) => {
+  t.deepEqual(await btc.promisify(callCallbackWithSuccess)(val), [null, val])
+  t.deepEqual(await btc.promisify(callCallbackWithFailure)(val), [err])
+
+  t.end()
+})
+
+test('promisify with context', async (t) => {
+  t.deepEqual(await btc.promisify(assertContext(t, callCallbackWithSuccess)).call(ctx, val), [null, val])
+  t.deepEqual(await btc.promisify(assertContext(t, callCallbackWithFailure)).call(ctx, val), [err])
 
   t.end()
 })
