@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/better-try-catch.svg)](https://badge.fury.io/js/better-try-catch) [![Build Status](https://travis-ci.org/riophae/better-try-catch.svg)](https://travis-ci.org/riophae/better-try-catch) [![Dependency Status](https://david-dm.org/riophae/better-try-catch.svg)](https://david-dm.org/riophae/better-try-catch) [![Coverage Status](https://codecov.io/gh/riophae/better-try-catch/branch/master/graph/badge.svg)](https://codecov.io/gh/riophae/better-try-catch)
 
-Try-catch wrapper for easy error handling.
+Try-catch wrapper for easy error handling. Inspired by [await-to-js](https://github.com/scopsy/await-to-js).
 
 ## Installation
 
