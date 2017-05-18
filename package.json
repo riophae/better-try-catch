@@ -1,6 +1,6 @@
 {
   "name": "better-try-catch",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Try-catch wrapper for easy error handling.",
   "main": "index.js",
   "files": [],
