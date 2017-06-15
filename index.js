@@ -3,11 +3,11 @@
 var isPromise = require('is-promise')
 
 function onFulfilled(result) {
-  return [null, result]
+  return [ null, result ]
 }
 
 function onRejected(err) {
-  return [err]
+  return [ err ]
 }
 
 function betterTryCatch(fn) {
@@ -16,16 +16,16 @@ function betterTryCatch(fn) {
       var result = fn.apply(this, arguments)
       return isPromise(result)
         ? result.then(onFulfilled, onRejected)
-        : [null, result]
+        : [ null, result ]
     } catch (err) {
-      return [err]
+      return [ err ]
     }
   }
 }
 
 function promisify(fn) {
   return function () {
-    var ctx = this
+    var self = this
     var len = arguments.length
     var i
     var args = new Array(len)
@@ -33,10 +33,10 @@ function promisify(fn) {
       args[i] = arguments[i]
 
     return new Promise(function (resolve) {
-      args[i] = function (err, result) {
-        resolve(err ? [err] : [null, result])
+      args[i] = function callback(err, result) {
+        resolve(err ? [ err ] : [ null, result ])
       }
-      fn.apply(ctx, args)
+      fn.apply(self, args)
     })
   }
 }

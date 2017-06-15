@@ -1,0 +1,10 @@
+{
+  "extends": "riophae/legacy",
+  "env": {
+    "node": true,
+    "browser": false
+  },
+  "globals": {
+    "Promise": true
+  }
+}
