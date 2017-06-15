@@ -10,35 +10,42 @@ function onRejected(err) {
   return [ err ]
 }
 
+function getFnName(fn) {
+  return (fn.name || '').replace(/\s|bound(?!$)/g, '')
+}
+
 function betterTryCatch(fn) {
-  return function () {
-    try {
-      var result = fn.apply(this, arguments)
-      return isPromise(result)
-        ? result.then(onFulfilled, onRejected)
-        : [ null, result ]
-    } catch (err) {
-      return [ err ]
-    }
-  }
+  var name = getFnName(fn)
+
+  return eval('(function ' + name + '() {\n' +
+    '  try {\n' +
+    '    var result = fn.apply(this, arguments)\n' +
+    '    return isPromise(result)\n' +
+    '      ? result.then(onFulfilled, onRejected)\n' +
+    '      : [ null, result ]\n' +
+    '  } catch (err) {\n' +
+    '    return [ err ]\n' +
+    '  }\n' +
+    '})')
 }
 
 function promisify(fn) {
-  return function () {
-    var self = this
-    var len = arguments.length
-    var i
-    var args = new Array(len)
-    for (i = 0; i < len; i++)
-      args[i] = arguments[i]
+  var name = getFnName(fn)
 
-    return new Promise(function (resolve) {
-      args[i] = function callback(err, result) {
-        resolve(err ? [ err ] : [ null, result ])
-      }
-      fn.apply(self, args)
-    })
-  }
+  return eval('(function ' + name + '() {\n' +
+    '  var self = this\n' +
+    '  var len = arguments.length\n' +
+    '  var i\n' +
+    '  var args = new Array(len)\n' +
+    '  for (i = 0; i < len; i++)\n' +
+    '    args[i] = arguments[i]\n' +
+    '  return new Promise(function (resolve) {\n' +
+    '    args[i] = function callback(err, result) {\n' +
+    '      resolve(err ? [ err ] : [ null, result ])\n' +
+    '    }\n' +
+    '    fn.apply(self, args)\n' +
+    '  })\n' +
+    '})')
 }
 
 module.exports = betterTryCatch

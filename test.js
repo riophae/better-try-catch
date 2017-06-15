@@ -35,6 +35,8 @@ function assertContext(t, f) {
 }
 
 test('basic', (t) => {
+  t.equal(btc(success).name, success.name, 'should retain the original function name')
+
   t.deepEqual(btc(success)(val), [null, val])
   t.deepEqual(btc(failure)(val), [err])
 
@@ -63,6 +65,12 @@ test('async/await with context', async (t) => {
 })
 
 test('promisify', async (t) => {
+  t.equal(
+    btc.promisify(callCallbackWithSuccess).name,
+    callCallbackWithSuccess.name,
+    'should retain the original function name'
+  )
+
   t.deepEqual(await btc.promisify(callCallbackWithSuccess)(val), [null, val])
   t.deepEqual(await btc.promisify(callCallbackWithFailure)(val), [err])
 
