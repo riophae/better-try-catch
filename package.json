@@ -6,7 +6,8 @@
   "files": [],
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run lint && tap test.js --coverage",
+    "tests-only": "tap test.js --converage",
+    "test": "npm run lint && npm run tests-only",
     "codecov": "tap --coverage-report=lcov && codecov"
   },
   "repository": {
