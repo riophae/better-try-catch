@@ -34,7 +34,7 @@ async function example2() {
 }
 ```
 
-## I didn't see it's "better"?
+## I didn't see it's "better?"
 
 Consider a situation like this:
 
