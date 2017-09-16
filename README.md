@@ -59,7 +59,7 @@ var err // Hoist the error variable declaration
 try {
   doSomething()
 } catch (ex) {
-  err = ex // Notice here
+  err = ex // Note here
   // Also, we can not simply place the `if` statement inside the catch block
   // Since if no errors occured then the `if` statement will not execute at all
 }
