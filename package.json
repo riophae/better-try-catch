@@ -6,7 +6,7 @@
   "files": [],
   "scripts": {
     "lint": "eslint .",
-    "tests-only": "tap test.js --coverage",
+    "tests-only": "tap test/index.js --coverage",
     "test": "npm run lint && npm run tests-only",
     "codecov": "tap --coverage-report=lcov && codecov"
   },
@@ -32,6 +32,7 @@
   "devDependencies": {
     "codecov": "^2.1.0",
     "eslint": "^4.0.0",
+    "eslint-config-riophae": "0.0.1",
     "eslint-plugin-import": "^2.3.0",
     "tap": "^10.3.2"
   }
