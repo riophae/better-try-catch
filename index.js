@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars, no-eval */
+
 'use strict'
 
 var isPromise = require('is-promise')

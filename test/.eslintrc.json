@@ -1,0 +1,10 @@
+{
+  "extends": "riophae",
+  "env": {
+    "node": true,
+    "browser": false
+  },
+  "rules": {
+    "func-names": 0
+  }
+}
